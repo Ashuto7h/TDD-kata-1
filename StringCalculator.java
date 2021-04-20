@@ -1,5 +1,5 @@
 class StringCalculator {
-    public int Add(String numbers) {
+    public int Add(String numbers) throws Exception {
         int sum = 0;
         char delimiters[];
         String nums[];
@@ -17,14 +17,22 @@ class StringCalculator {
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == "")
                 continue;
-            sum += Integer.parseInt(nums[i]);
+            int num = Integer.parseInt(nums[i]);
+            if (num < 0)
+                throw new Exception("negatives not allowed : " + num);
+            else
+                sum += num;
         }
         return sum;
     }
 
     public static void main(String[] args) {
         StringCalculator sc = new StringCalculator();
-        int ans = sc.Add("//;-\n3-4;5,4\n5");
-        System.out.println(ans);
+        try {
+            int ans = sc.Add("//;\n3,4;5,-4\n5");
+            System.out.println(ans);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

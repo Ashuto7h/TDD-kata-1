@@ -19,7 +19,6 @@ class StringCalculator {
             Pattern p = Pattern.compile("\\[.+\\]");
             m = p.matcher(inputs[0]);
             while (m.find()) {
-                System.out.println(m.group());
                 delimeters.add(m.group().substring(1, m.group().length() - 1));
             }
             String splitter = ",|\n";
@@ -65,7 +64,7 @@ class StringCalculator {
     public static void main(String[] args) {
         StringCalculator sc = new StringCalculator();
         try {
-            int ans = sc.Add("//[***]\n3***4***5,1001\n");
+            int ans = sc.Add("//[***][%%%]\n3***4%%%5,1001\n");
             System.out.println(ans);
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,6 +1,8 @@
 package com.ashyk;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class StringCalculator {
     static int call = 0;
@@ -8,19 +10,26 @@ class StringCalculator {
     public int Add(String numbers) throws Exception {
         call++;
         int sum = 0;
-        char delimiters[];
+        Matcher m;
+        ArrayList<String> delimeters = new ArrayList<String>();
         String nums[];
+
         if (numbers.substring(0, 2).equals("//")) {
             String inputs[] = numbers.split("\n", 2);
-            delimiters = inputs[0].substring(2).toCharArray();
-            String splitter = ",|\n";
-            for (char i : delimiters) {
-                splitter += "|" + i;
+            Pattern p = Pattern.compile("\\[.+\\]");
+            m = p.matcher(inputs[0]);
+            while (m.find()) {
+                System.out.println(m.group());
+                delimeters.add(m.group().substring(1, m.group().length() - 1));
             }
+            String splitter = ",|\n";
+            for (String i : delimeters)
+                splitter += "|" + i;
             nums = inputs[1].split(splitter);
         } else {
             nums = numbers.split(",|\n");
         }
+
         ArrayList<Integer> negetives = new ArrayList<Integer>();
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == "")
@@ -50,7 +59,7 @@ class StringCalculator {
     public static void main(String[] args) {
         StringCalculator sc = new StringCalculator();
         try {
-            int ans = sc.Add("//;\n3,4;5,1001\n");
+            int ans = sc.Add("//[***]\n3***4***5,1001\n");
             System.out.println(ans);
         } catch (Exception e) {
             e.printStackTrace();

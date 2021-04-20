@@ -1,7 +1,12 @@
+package com.ashyk;
+
 import java.util.ArrayList;
 
 class StringCalculator {
+    static int call = 0;
+
     public int Add(String numbers) throws Exception {
+        call++;
         int sum = 0;
         char delimiters[];
         String nums[];
@@ -36,6 +41,10 @@ class StringCalculator {
         return sum;
     }
 
+    public int getCalledCount() {
+        return call;
+    }
+
     public static void main(String[] args) {
         StringCalculator sc = new StringCalculator();
         try {
@@ -44,5 +53,6 @@ class StringCalculator {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

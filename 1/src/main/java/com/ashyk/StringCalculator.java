@@ -23,8 +23,14 @@ class StringCalculator {
                 delimeters.add(m.group().substring(1, m.group().length() - 1));
             }
             String splitter = ",|\n";
-            for (String i : delimeters)
-                splitter += "|" + i;
+            for (String i : delimeters) {
+                if (i.charAt(0) == '*') {
+                    char z[] = i.toCharArray();
+                    for (char j : z)
+                        splitter += "|" + "\\" + j;
+                } else
+                    splitter += "|" + i;
+            }
             nums = inputs[1].split(splitter);
         } else {
             nums = numbers.split(",|\n");

@@ -29,6 +29,8 @@ class StringCalculator {
 
             if (num < 0)
                 negetives.add(num);
+            else if (num > 1000)
+                continue;
             else
                 sum += num;
         }
@@ -48,7 +50,7 @@ class StringCalculator {
     public static void main(String[] args) {
         StringCalculator sc = new StringCalculator();
         try {
-            int ans = sc.Add("//;\n3,4;5,-4\n-5");
+            int ans = sc.Add("//;\n3,4;5,1001\n");
             System.out.println(ans);
         } catch (Exception e) {
             e.printStackTrace();

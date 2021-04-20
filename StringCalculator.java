@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class StringCalculator {
     public int Add(String numbers) throws Exception {
         int sum = 0;
@@ -14,14 +16,22 @@ class StringCalculator {
         } else {
             nums = numbers.split(",|\n");
         }
+        ArrayList<Integer> negetives = new ArrayList<Integer>();
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == "")
                 continue;
             int num = Integer.parseInt(nums[i]);
+
             if (num < 0)
-                throw new Exception("negatives not allowed : " + num);
+                negetives.add(num);
             else
                 sum += num;
+        }
+        if (!negetives.isEmpty()) {
+            String msg = "negatives not allowed : ";
+            for (int i : negetives)
+                msg += i + " ";
+            throw new Exception(msg);
         }
         return sum;
     }
@@ -29,7 +39,7 @@ class StringCalculator {
     public static void main(String[] args) {
         StringCalculator sc = new StringCalculator();
         try {
-            int ans = sc.Add("//;\n3,4;5,-4\n5");
+            int ans = sc.Add("//;\n3,4;5,-4\n-5");
             System.out.println(ans);
         } catch (Exception e) {
             e.printStackTrace();

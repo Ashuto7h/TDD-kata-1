@@ -2,10 +2,10 @@ class StringCalculator {
     public int Add(String numbers) {
         int sum = 0;
         String nums[] = numbers.split(",");
-        for (String num : nums) {
-            if (num == "")
+        for (int i = 0; i < Integer.min(nums.length, 2); i++) {
+            if (nums[i] == "")
                 continue;
-            sum += Integer.parseInt(num);
+            sum += Integer.parseInt(nums[i]);
         }
         return sum;
     }
